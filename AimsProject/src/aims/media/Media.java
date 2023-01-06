@@ -1,77 +1,83 @@
 package aims.media;
 
+import java.util.Comparator;
+
+import aims.utils.MediaComparatorByCostTitle;
+import aims.utils.MediaComparatorByTitleCost;
+
 public abstract class Media {
-	protected int id;
-	protected String title;
-	protected String category;
-	protected float cost;
-	
-	
-	
-	public int getId() {
-		return id;
-	}
+    private int id;
+    private String title;
+    private String category;
+    private float cost;
 
+    public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
+    public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
 
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public String getTitle() {
+        return title;
+    }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getCategory() {
+        return category;
+    }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
+    public float getCost() {
+        return cost;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setCost(float cost) {
+        this.cost = cost;
+    }
 
+    public Media() {
+    }
 
+    public Media(String title) {
+        this.title = title;
+    }
 
-	public String getCategory() {
-		return category;
-	}
+    public Media(String title, String category, float cost) {
+        this.title = title;
+        this.category = category;
+        this.cost = cost;
+    }
 
+    public Media(int id, String category, String title, float cost) {
+        this.title = title;
+        this.id = id;
+        this.category = category;
+        this.cost = cost;
+    }
 
+//    @Override
+//    public boolean equals(Object obj) {
+//        // TODO Auto-generated method stub
+//        return this.title == ((Media) obj).title;
+//    }
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
+    public boolean isMatch(String st) {
+        if (this.title.equals(st))
+            return true;
+        return false;
+    }
 
-
-
-	public float getCost() {
-		return cost;
-	}
-
-
-
-	public void setCost(float cost) {
-		this.cost = cost;
-	}
-
-
-
-	public Media() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	 @Override
-	    public abstract String toString();
-
-	    public void printDetail() {
-	        System.out.println(toString());
-	    }
-
-	    @Override
-	    public boolean equals(Object obj) {
-	        if (!(obj instanceof Media))
-	            return false;
-	        return this.id == ((Media) obj).id;
-	    }
+    public abstract void play();
 
 }

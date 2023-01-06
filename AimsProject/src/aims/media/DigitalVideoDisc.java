@@ -1,127 +1,32 @@
 package aims.media;
 
-public class DigitalVideoDisc extends Disc {
-    
-    private String director;
-    private int length;
-    
-    
-    private static int nbDigitalVideoDiscs = 0;
-    
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
-    public String getTitle() {
-        return title;
-    }
-    
-    public boolean isMatch(String title){
-        return this.title.equalsIgnoreCase(title);
-    }
-    
-    public String printDetail(){
-		return(getTitle() + " - " + getCategory() + " - " + getDirector() + " - " + getLength() + ": " + getCost() + " $");
-	}
+import javax.swing.*;
+import java.awt.*;
 
+public class DigitalVideoDisc extends Disc implements Playable {
 
-    public void setTitle(String title) {
-		this.title = title;
-	}
-
-
-
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-
-
-
-	public void setDirector(String director) {
-		this.director = director;
-	}
-
-
-
-
-	public void setLength(int length) {
-		this.length = length;
-	}
-
-
-
-
-	public void setCost(float cost) {
-		this.cost = cost;
-	}
-
-
-
-
-	public String getCategory() {
-        return category;
+    public DigitalVideoDisc(String string, String string2, String string3, int i, float f) {
+        super(string, string2, string3, i, f);
     }
 
-
-    public String getDirector() {
-        return director;
-    }
-
-
-    public int getLength() {
-        return length;
-    }
-
-    public float getCost() {
-        return cost;
-    }
-
-    public DigitalVideoDisc(String title) {
-        this.title = title;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
-        this.title = title;
-    }
-
-    public DigitalVideoDisc() {
-    }
-
-    public DigitalVideoDisc(String title, String category, float cost) {
-    	this(title);
-        this.category = category;
-        this.cost = cost;;
-    }
-
-    public DigitalVideoDisc(String title, String category, String director, float cost) {
-    	this(title, category, cost);
-        this.director = director;
-    }
-
-
-    public void print_Details() {
-        System.out.println("Name " + this.getTitle());
-        System.out.println("Category " + this.getCategory());
-        System.out.println("Director " + this.getDirector());
-        System.out.println("Length " + this.getLength());
-        System.out.println("Cost " + this.getCost());
-        System.out.println("-----------------------------");
-    }
-
-    public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-    	this(title, category, director, cost);
-        this.length = length;
-    }
-    
+    /**
+     * we implement 2 ways to create dialog, with Swing and JavaFX.
+     * If involve from StoreSreen means Swing UI, use JavaFX will crash and vice versa
+     * So, F**k Java
+     */
     public void play() {
-    	System.out.println("Playing DVD: " + this.getTitle());
-    	System.out.println("DVD length: " + this.getLength());
-
+        JFrame j = new JFrame();
+        String text =  "Playing DVD: " + this.getTitle() + "\nDVD length: " + this.getLength();
+        JOptionPane.showMessageDialog(j, text, "Play Media", JOptionPane.INFORMATION_MESSAGE);
     }
+
+    @Override
+    public String toString() {
+        return "(Digital Dvd): " + this.getTitle() + " - " + this.getCategory() + " - " + this.getDirector() + " - "
+                + this.getLength() + " : " + this.getCost() + "$";
+    }
+
 }

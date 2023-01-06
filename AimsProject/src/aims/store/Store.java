@@ -1,59 +1,51 @@
 package aims.store;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import aims.media.DigitalVideoDisc;
 import aims.media.Media;
 
 public class Store {
-	private ArrayList<Media> itemsInStore = new ArrayList<Media>();
+    private ArrayList<Media> itemsInStore = new ArrayList<Media>();
 
-	public Store() {
-		super();
-	}
-	
-	public boolean addMedia(Media media) {
-        if (itemsInStore.contains(media))
+    public Store() {
+
+    }
+
+    public boolean addMedia(Media media) {
+        if (itemsInStore.contains(media)) {
+            System.out.println("The media is already exist");
             return false;
+        }
         itemsInStore.add(media);
         return true;
     }
 
     public boolean removeMedia(Media media) {
-        if (!itemsInStore.contains(media)) {
-            System.out.println("The media is not in the store. Can't remove!");
-            return false;
+        if (itemsInStore.contains(media)) {
+            itemsInStore.remove(media);
+            return true;
         }
-        itemsInStore.remove(media);
-        return true;
+        System.out.println("The media is not exist");
+        return false;
     }
-    
-    public void printDetail() {
-        System.out.println("Store items:");
+
+    public void printStore() {
+        System.out.println("Store");
         for (Media media : itemsInStore) {
-            media.printDetail();
+            System.out.println(media.toString());
         }
     }
-	
-//	public void addDVD(DigitalVideoDisc dvd) {
-//		itemsInStore.add(dvd);
-//	}
-//	
-//	public void removeDVD(DigitalVideoDisc dvd) {
-//		
-//		// create an Iterator Object
-//		Iterator<DigitalVideoDisc> itr = itemsInStore.iterator();
-//		
-//		// hold true till there is single element remaining in object
-//		while(itr.hasNext()) {
-//			DigitalVideoDisc tmp = itr.next();
-//			
-//			// If equal by id, then remove
-//			if(tmp.getId() == dvd.getId()) {
-//				itr.remove();
-//			}
-//		}
-//	}
-	
+
+    public Media searchStore(String st) {
+        for (Media media : itemsInStore) {
+            if (media.isMatch(st)) {
+                return media;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Media> getItemInStore() {
+        return itemsInStore;
+    }
 }
